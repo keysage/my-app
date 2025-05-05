@@ -27,12 +27,15 @@
  */
 //创建vue
 import { createApp } from 'vue'
+import { createPinia } from 'pinia';
 import App from './App.vue'
 import { createRouter, createMemoryHistory } from 'vue-router';
 import './index.css';
 import Home from './views/Home.vue';
 import Conversation from './views/Conversation.vue';
 import Settings from './views/Settings.vue';
+import { useConversationStore } from './stores/conversation';
+// const stores = useConversationStore()
 
 //配置路由规则
 const routes = [
@@ -45,9 +48,16 @@ const router = createRouter({
     history: createMemoryHistory(),
     routes
 })
+//路由前置守卫拦截器
+router.beforeEach((to)=>{
+    const store = useConversationStore()
+    // console.log('path', to.path);
+    // 如果离开会话页面，则重置selectedId为-1
+    if(!to.path.startsWith('/conversation')){
+        store.selectedId = -1
+    } 
+})
 
 
-console.log('👋 This message is being logged by "renderer.ts", included via Vite');
-
-//挂载vue
-createApp(App).use(router).mount('#app')
+//挂载vue，router，pinia
+createApp(App).use(router).use(createPinia()).mount('#app')

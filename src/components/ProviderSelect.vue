@@ -16,7 +16,7 @@
                     <!-- 大模型的图标和名字 -->
                     <SelectLabel class="flex items-center px-6 py-7 text-gray-500">
                         <img :src="provider.avatar" :alt="provider.name" class="h-5 w-5 mr-2 rounded">
-                        {{ provider.name }}
+                        {{ provider.title }}
                     </SelectLabel>
                     <!-- 这里对每一个大模型进行分组 -->
                     <SelectGroup>

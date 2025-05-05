@@ -3,7 +3,7 @@
         <!-- 左侧聊天数据 -->
         <div class="w-[300px] bg-gray-200 h-full border-r border-gray-300">
             <div class="h-[90%] overflow-y-auto">
-                <ConversationList :items="conversations" />
+                <ConversationList :items="items" />
             </div>
             <!-- 新建聊天和设置 -->
             <div class="h-[10%] grid grid-cols-2 gap-2 p-2">
@@ -27,31 +27,35 @@
         </div>
         <!-- 右侧问答搜索栏 -->
         <div class="h-full flex-1 ">
-            <Button color="purple" :loading="loading" plain icon-name="radix-icons:gear" @click="handleloading">
-            </Button>
+            <!-- <Button color="purple" :loading="loading" plain icon-name="radix-icons:gear" @click="handleloading">
+                hello
+            </Button> -->
             <router-view></router-view>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-
 import { Icon } from "@iconify/vue";
 import ConversationList from './components/ConversationList.vue';
-import { ConversationProps } from "./types";
+import { useConversationStore } from "./stores/conversation";
 import Button from "./components/Button.vue";
-import { ref, onMounted } from "vue";
+import { useProviderStore } from "./stores/provider";
+import { ref, onMounted, computed } from "vue";
+//添加数据库
 import { db, initProviers } from "./db";
 
-const conversations = ref<ConversationProps[]>([])
 const loading = ref(false)
 const handleloading = () => {
     loading.value = true
 }
+const conversationStore = useConversationStore()
+const providerStore = useProviderStore()
+const items = computed(() => conversationStore.items)
 
 onMounted(async () => {
     await initProviers()
-    conversations.value = await db.conversations.toArray()
+    conversationStore.fetchConversations()
 })
 </script>
 

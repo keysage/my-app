@@ -31,22 +31,22 @@ export const messages: MessageProps[] = [
 export const providers: ProviderProps[] = [
     {
         id: 1,
-        name: '文心一言',
-        title: '文心一言', // 补充必填属性
+        name: 'qianfan',
+        title: '百度千帆', // 补充必填属性
         desc: '文心一言百度出品的大模型',
-        avatar: 'https://example.com/avatar.png',
+        avatar: 'https://qph.cf2.poecdn.net/main-thumb-pb-3004-50-jougqzjtwfqfyqprxbdwofvnwattmtrg.jpeg',
         createdAt: '2024-07-03',
         updatedAt: '2024-07-03',
-        models: ['ERNIE-4.08K', 'ERNIE-3.5-8K', 'ERNIE-Speed-8K'],
+        models: ['ERNIE-4.08K', 'ERNIE-3.5-8K', 'ERNIE-Speed-128K'],
     },
     {
         id: 2, // 唯一 id
-        name: '通义千问',
-        title: '通义千问', // 补充必填属性
+        name: 'dashscope',
+        title: '阿里灵积', // 补充必填属性
         desc: '阿里云开发的大模型',
-        avatar: 'https://example.com/avatar2.png',
+        avatar: 'https://qph.cf2.poecdn.net/main-thumb-pb-3004-50-jougqzjtwfqfyqprxbdwofvnwattmtrg.jpeg',
         createdAt: '2024-07-03',
         updatedAt: '2024-07-03',
-        models: ['Qwen-7B', 'Qwen-14B'],
+        models: ['Qwen-7B', 'Qwen-14B','qwen-turbo'],
     }
 ];
